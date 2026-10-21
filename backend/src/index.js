@@ -15,13 +15,14 @@
 // app.listen(port, ()=>console.log(`API running on http://localhost:${port}`));
 
 
+
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth.js";
+import noteRoutes from "./routes/notes.js"; // new
 
 const app = express();
-
 app.use(cors({ origin: process.env.FRONTEND_URL }));
 app.use(express.json());
 
@@ -30,6 +31,7 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/notes", noteRoutes); // new
 
 // Catch-all error handler (must be last, with 4 arguments)
 app.use((err, req, res, next) => {
